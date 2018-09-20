@@ -21,7 +21,6 @@ public class Loops {
         }
         while (x <= 10);
 
-
         scanner.close();
 
     }
