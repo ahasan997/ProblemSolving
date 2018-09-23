@@ -1,17 +1,16 @@
-package Data_Structures;
+package Data_Structures.Array;
+
 import java.util.*;
 
 public class LeftRotation {
 
-    private static final Scanner scanner = new Scanner(System.in);
-
     public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
         String[] nd = scanner.nextLine().split(" ");
 
         int n = Integer.parseInt(nd[0]);
-
         int d = Integer.parseInt(nd[1]);
-
         int[] a = new int[n];
 
         String[] aItems = scanner.nextLine().split(" ");
@@ -22,26 +21,18 @@ public class LeftRotation {
             a[i] = aItem;
         }
 
-        for(int x = 0; x < d; x++)
-        {
+        for (int x = 0; x < d; x++) {
             int z = a[0];
 
-            for (int y = 0; y < n-1; y++)
-            {
-                a[y] = a[y+1];
-
+            for (int y = 0; y < n - 1; y++) {
+                a[y] = a[y + 1];
             }
-
-            a[n-1] = z;
-
+            a[n - 1] = z;
         }
 
-        for(int m: a)
-        {
-            System.out.print(m+" ");
+        for (int m : a) {
+            System.out.print(m + " ");
         }
-
         scanner.close();
     }
-
 }
