@@ -1,0 +1,11 @@
+* Few tastcase shows wrong answer
+
+    1)  Stacks -> Equal Stacks
+    2)
+
+* Need Code Optimization
+
+    1)  Array -> Array Manipulation
+    2)  Stack -> Maximum Elements
+    3)  Heap -> Qheap1
+
