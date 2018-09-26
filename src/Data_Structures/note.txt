@@ -1,11 +1,12 @@
-* Few tastcase shows wrong answer
+* Few tastcase failed
 
     1)  Stacks -> Equal Stacks
-    2)
+    2)  Heap -> Jesse And Cookies
 
 * Need Code Optimization
 
     1)  Array -> Array Manipulation
     2)  Stack -> Maximum Elements
     3)  Heap -> Qheap1
+    4)
 
