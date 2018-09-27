@@ -2,7 +2,7 @@ package Data_Structures.LinkedList;
 
 import java.util.*;
 
-public class InsertNodeAtTailLinkedList {
+public class InsertNodeAtHead {
 
     static class LinkedListNode {
         public int data;
@@ -23,16 +23,16 @@ public class InsertNodeAtTailLinkedList {
             this.tail = null;
         }
 
-        public void insertNode(int value) {
+        public void insertNodeAtHead(int value) {
             LinkedListNode node = new LinkedListNode(value);
 
             if (head == null) {
                 head = node;
             } else {
-                tail.next = node;
+                LinkedListNode oHead = head;
+                head = node;
+                head.next = oHead;
             }
-
-            tail = node;
         }
     }
 
@@ -41,8 +41,9 @@ public class InsertNodeAtTailLinkedList {
         int count = Integer.parseInt(sc.nextLine().trim());
         MyLinkedList llist = new MyLinkedList();
 
+
         for (int x = 0; x < count; x++) {
-            llist.insertNode(Integer.valueOf(sc.nextLine()));
+            llist.insertNodeAtHead(Integer.valueOf(sc.nextLine()));
         }
 
         LinkedListNode data = llist.head;
