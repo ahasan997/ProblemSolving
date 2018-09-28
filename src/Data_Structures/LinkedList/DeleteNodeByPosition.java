@@ -71,10 +71,10 @@ public class DeleteNodeByPosition {
         int toDeletePosition = Integer.valueOf(sc.nextLine().trim());
         llist.deleteNodeByPosition(toDeletePosition);
 
-        LinkedListNode data = llist.head;
-        while (data != null) {
-            System.out.print(data.data + " ");
-            data = data.next;
+        LinkedListNode nNode = llist.head;
+        while (nNode != null) {
+            System.out.print(nNode.data + " ");
+            nNode = nNode.next;
         }
     }
 }

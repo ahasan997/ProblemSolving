@@ -46,10 +46,10 @@ public class InsertNodeAtHead {
             llist.insertNodeAtHead(Integer.valueOf(sc.nextLine()));
         }
 
-        LinkedListNode data = llist.head;
-        while (data != null) {
-            System.out.println(data.data);
-            data = data.next;
+        LinkedListNode nNode = llist.head;
+        while (nNode != null) {
+            System.out.println(nNode.data);
+            nNode = nNode.next;
         }
     }
 }
