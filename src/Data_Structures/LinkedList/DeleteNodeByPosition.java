@@ -2,8 +2,7 @@ package Data_Structures.LinkedList;
 
 import java.util.*;
 
-public class InsertNodeAtSPosition {
-
+public class DeleteNodeByPosition {
     static class LinkedListNode {
         public int data;
         public LinkedListNode next;
@@ -31,25 +30,31 @@ public class InsertNodeAtSPosition {
             } else {
                 tail.next = node;
             }
-
             tail = node;
         }
 
-        public void insertNodeAtSPosition(int value, int position) {
-            LinkedListNode node = new LinkedListNode(value);
-
-            if (position == 0) {
-                LinkedListNode oHead = head;
-                head = node;
-                head.next = oHead;
-            } else {
+        public void deleteNodeByPosition(int dPosition) {
+            if (dPosition == 0 && head.next == null) {
+                head = null;
+            } else if (dPosition == 0 && head.next != null) {
+                head = head.next;
+            } else if (dPosition == 1) {
                 tail = head;
-                for (int x = 1; x < position; x++) {
+                for (int x = 0; x <= dPosition; x++) {
                     tail = tail.next;
                 }
-                LinkedListNode oHead = tail.next;
-                tail.next = node;
-                node.next = oHead;
+                head.next = tail;
+            } else {
+                tail = head;
+                for (int x = 0; x <= dPosition; x++) {
+                    tail = tail.next;
+                }
+                LinkedListNode nextNode = tail;
+                tail = head;
+                for (int x = 0; x < dPosition - 1; x++) {
+                    tail = tail.next;
+                }
+                tail.next = nextNode;
             }
         }
     }
@@ -63,20 +68,12 @@ public class InsertNodeAtSPosition {
             llist.insertNodeAtTail(Integer.valueOf(sc.nextLine()));
         }
 
-        LinkedListNode data2 = llist.head;
-        while (data2 != null) {
-            System.out.println(data2.data);
-            data2 = data2.next;
-        }
-
-        int newElement = Integer.valueOf(sc.nextLine().trim());
-        int newPosition = Integer.valueOf(sc.nextLine().trim());
-
-        llist.insertNodeAtSPosition(newElement,newPosition);
+        int toDeletePosition = Integer.valueOf(sc.nextLine().trim());
+        llist.deleteNodeByPosition(toDeletePosition);
 
         LinkedListNode data = llist.head;
         while (data != null) {
-            System.out.println(data.data);
+            System.out.print(data.data + " ");
             data = data.next;
         }
     }
