@@ -29,9 +29,7 @@ public class SparseArrays {
     public static void main(String[] args) throws IOException {
         Scanner scanner = new Scanner(System.in);
 
-        int stringsCount = scanner.nextInt();
-        scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
-
+        int stringsCount = Integer.parseInt(scanner.nextLine().trim());
         String[] strings = new String[stringsCount];
 
         for (int i = 0; i < stringsCount; i++) {
@@ -39,8 +37,7 @@ public class SparseArrays {
             strings[i] = stringsItem;
         }
 
-        int queriesCount = scanner.nextInt();
-        scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
+        int queriesCount = Integer.parseInt(scanner.nextLine().trim());
         String[] queries = new String[queriesCount];
 
         for (int i = 0; i < queriesCount; i++) {

@@ -20,13 +20,10 @@ public class ArrayDS {
     public static void main(String[] args) throws IOException {
         Scanner scanner = new Scanner(System.in);
 
-        int arrCount = scanner.nextInt();
-        scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
-
+        int arrCount = Integer.parseInt(scanner.nextLine().trim());
         int[] arr = new int[arrCount];
 
         String[] arrItems = scanner.nextLine().split(" ");
-        scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
 
         for (int i = 0; i < arrCount; i++) {
             int arrItem = Integer.parseInt(arrItems[i]);
