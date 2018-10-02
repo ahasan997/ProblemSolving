@@ -1,15 +1,26 @@
 package Data_Structures.Tree;
 
-import java.util.Scanner;
+import java.util.*;
 
-public class PostorderTraversal {
-    public static void postOrder(Node root) {
+public class InorderTraversal {
+    public static void inOrder(Node root) {
         if(root == null) {
             return;
         }
-        postOrder(root.left);
-        postOrder(root.right);
-        System.out.print(root.data+" ");
+
+        Stack<Node> stack = new Stack<>();
+        Node tmp = root;
+
+        while (!stack.isEmpty() || tmp != null) {
+            if(tmp != null) {
+                stack.push(tmp);
+                tmp = tmp.left;
+            } else {
+                tmp = stack.pop();
+                System.out.print(tmp.data+" ");
+                tmp = tmp.right;
+            }
+        }
     }
 
     public static Node insert(Node root, int data) {
@@ -32,11 +43,11 @@ public class PostorderTraversal {
         Scanner sc = new Scanner(System.in);
         int t = sc.nextInt();
         Node root = null;
-        while (t-- > 0) {
+        for (int x = 0; x < t; x++) {
             int data = sc.nextInt();
             root = insert(root, data);
         }
         sc.close();
-        postOrder(root);
+        inOrder(root);
     }
 }
