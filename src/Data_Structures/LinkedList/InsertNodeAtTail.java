@@ -16,24 +16,27 @@ public class InsertNodeAtTail {
 
     static class MyLinkedList {
         public LinkedListNode head;
-        public LinkedListNode tail;
 
         MyLinkedList() {
             this.head = null;
-            this.tail = null;
         }
+    }
 
-        public void insertNodeAtTail(int value) {
-            LinkedListNode node = new LinkedListNode(value);
-
-            if (head == null) {
-                head = node;
-            } else {
-                tail.next = node;
-            }
-
-            tail = node;
+    public static void printLinkedList(LinkedListNode node) {
+        while (node != null) {
+            System.out.println(node.data);
+            node = node.next;
         }
+    }
+
+    public static LinkedListNode insertNodeAtTail(LinkedListNode head, int value) {
+        LinkedListNode node = new LinkedListNode(value);
+        if (head == null) {
+            head = node;
+        } else {
+            head.next = insertNodeAtTail(head.next, value);
+        }
+        return head;
     }
 
     public static void main(String[] args) {
@@ -42,13 +45,11 @@ public class InsertNodeAtTail {
         MyLinkedList llist = new MyLinkedList();
 
         for (int x = 0; x < count; x++) {
-            llist.insertNodeAtTail(Integer.valueOf(sc.nextLine()));
+            int a = Integer.valueOf(sc.nextLine());
+            LinkedListNode llist_head = insertNodeAtTail(llist.head, a);
+            llist.head = llist_head;
         }
-
-        LinkedListNode nNode = llist.head;
-        while (nNode != null) {
-            System.out.println(nNode.data);
-            nNode = nNode.next;
-        }
+        printLinkedList(llist.head);
+        sc.close();
     }
 }

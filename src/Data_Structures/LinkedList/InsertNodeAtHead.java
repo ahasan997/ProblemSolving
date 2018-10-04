@@ -22,18 +22,25 @@ public class InsertNodeAtHead {
             this.head = null;
             this.tail = null;
         }
+    }
 
-        public void insertNodeAtHead(int value) {
-            LinkedListNode node = new LinkedListNode(value);
-
-            if (head == null) {
-                head = node;
-            } else {
-                LinkedListNode oHead = head;
-                head = node;
-                head.next = oHead;
-            }
+    public static void printLinkedList(LinkedListNode node) {
+        while (node != null) {
+            System.out.println(node.data);
+            node = node.next;
         }
+    }
+
+    public static LinkedListNode insertNodeAtHead(LinkedListNode head, int value) {
+        LinkedListNode node = new LinkedListNode(value);
+        if (head == null) {
+            head = node;
+        } else {
+            LinkedListNode oHead = head;
+            head = node;
+            head.next = oHead;
+        }
+        return head;
     }
 
     public static void main(String[] args) {
@@ -41,15 +48,12 @@ public class InsertNodeAtHead {
         int count = Integer.parseInt(sc.nextLine().trim());
         MyLinkedList llist = new MyLinkedList();
 
-
         for (int x = 0; x < count; x++) {
-            llist.insertNodeAtHead(Integer.valueOf(sc.nextLine()));
+            int a = Integer.valueOf(sc.nextLine());
+            LinkedListNode llist_head = insertNodeAtHead(llist.head, a);
+            llist.head = llist_head;
         }
-
-        LinkedListNode nNode = llist.head;
-        while (nNode != null) {
-            System.out.println(nNode.data);
-            nNode = nNode.next;
-        }
+        printLinkedList(llist.head);
+        sc.close();
     }
 }
