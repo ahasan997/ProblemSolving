@@ -2,7 +2,8 @@ package Data_Structures.LinkedList;
 
 import java.util.*;
 
-public class ReverseADoublyLinkedList {
+public class InsertingANodeIntoSortedDList {
+
     static class DoublyLinkedListNode {
         public int data;
         public DoublyLinkedListNode next;
@@ -43,18 +44,23 @@ public class ReverseADoublyLinkedList {
         }
     }
 
-    private static DoublyLinkedListNode reverse(DoublyLinkedListNode head) {
+    private static DoublyLinkedListNode sortedInsert(DoublyLinkedListNode head, int data) {
         List<Integer> arrList = new ArrayList<Integer>();
-        DoublyLinkedListNode data = head;
-        while (data != null) {
-            arrList.add(0, (data.data));
-            data = data.next;
+        DoublyLinkedListNode node = head;
+
+        while (node != null) {
+            arrList.add(node.data);
+            node = node.next;
         }
+        arrList.add(data);
+        Collections.sort(arrList);
         DoublyLinkedList llist = new DoublyLinkedList();
-        for (int x : arrList) {
-            llist.insertNode(x);
+        for (int x = 0; x < arrList.size(); x++) {
+            llist.insertNode(arrList.get(x));
         }
-        return llist.head;
+
+        head = llist.head;
+        return head;
     }
 
     public static void main(String[] args) {
@@ -66,7 +72,8 @@ public class ReverseADoublyLinkedList {
             llist.insertNode(llistItem);
         }
 
-        DoublyLinkedListNode llist1 = reverse(llist.head);
+        int data = Integer.parseInt(sc.nextLine());
+        DoublyLinkedListNode llist1 = sortedInsert(llist.head, data);
         printDoublyLinkedList(llist1);
         sc.close();
     }

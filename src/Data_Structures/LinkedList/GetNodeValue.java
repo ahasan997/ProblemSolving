@@ -2,7 +2,8 @@ package Data_Structures.LinkedList;
 
 import java.util.*;
 
-public class CompareTwoLinkedList {
+
+public class GetNodeValue {
     static class SinglyLinkedListNode {
         public int data;
         public SinglyLinkedListNode next;
@@ -35,25 +36,20 @@ public class CompareTwoLinkedList {
         }
     }
 
-    private static boolean compareLists(SinglyLinkedListNode head1, SinglyLinkedListNode head2) {
+    private static int getNode(SinglyLinkedListNode head, int positionFromTail) {
+        List<Integer> arrList = new ArrayList<Integer>();
+        SinglyLinkedListNode data = head;
 
-        boolean equal = true;
-        SinglyLinkedListNode nNode = head1;
-        SinglyLinkedListNode nNode2 = head2;
-
-        while (nNode != null) {
-            if (nNode2 == null) {
-                equal = false;
-                break;
-            } else {
-                if (nNode.data != nNode2.data) {
-                    equal = false;
-                }
-            }
-            nNode = nNode.next;
-            nNode2 = nNode2.next;
+        while (data != null) {
+            arrList.add(data.data);
+            data = data.next;
         }
-        return equal;
+
+        if (positionFromTail == 0) {
+            return arrList.get(arrList.size() - 1);
+        } else {
+            return arrList.get((arrList.size() - positionFromTail) - 1);
+        }
     }
 
     public static void main(String[] args) {
@@ -66,15 +62,9 @@ public class CompareTwoLinkedList {
             llist1.insertNode(llistItem);
         }
 
-        SinglyLinkedList llist2 = new SinglyLinkedList();
-        int llistCount2 = Integer.parseInt(sc.nextLine());
-        for (int i = 0; i < llistCount2; i++) {
-            int llistItem2 = Integer.parseInt(sc.nextLine());
-            llist2.insertNode(llistItem2);
-        }
-
-        boolean result = compareLists(llist1.head, llist2.head);
-        System.out.println(result ? 1 : 0);
+        int position = Integer.parseInt(sc.nextLine());
+        int result = getNode(llist1.head, position);
+        System.out.println(result);
         sc.close();
     }
 }

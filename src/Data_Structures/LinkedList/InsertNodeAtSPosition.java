@@ -3,81 +3,79 @@ package Data_Structures.LinkedList;
 import java.util.*;
 
 public class InsertNodeAtSPosition {
-
-    static class LinkedListNode {
+    static class SinglyLinkedListNode {
         public int data;
-        public LinkedListNode next;
+        public SinglyLinkedListNode next;
 
-        public LinkedListNode(int ndata) {
-            this.data = ndata;
+        private SinglyLinkedListNode(int nodeData) {
+            this.data = nodeData;
             this.next = null;
         }
     }
 
-    static class MyLinkedList {
-        public LinkedListNode head;
-        public LinkedListNode tail;
+    static class SinglyLinkedList {
+        public SinglyLinkedListNode head;
+        public SinglyLinkedListNode tail;
 
-        MyLinkedList() {
+        private SinglyLinkedList() {
             this.head = null;
             this.tail = null;
         }
 
-        public void insertNodeAtTail(int value) {
-            LinkedListNode node = new LinkedListNode(value);
+        private void insertNode(int nodeData) {
+            SinglyLinkedListNode node = new SinglyLinkedListNode(nodeData);
 
-            if (head == null) {
-                head = node;
+            if (this.head == null) {
+                this.head = node;
             } else {
-                tail.next = node;
+                this.tail.next = node;
             }
 
-            tail = node;
+            this.tail = node;
         }
+    }
 
-        public void insertNodeAtSPosition(int value, int position) {
-            LinkedListNode node = new LinkedListNode(value);
+    private static void printSinglyLinkedList(SinglyLinkedListNode node) {
+        while (node != null) {
+            System.out.println(node.data);
+            node = node.next;
+        }
+    }
 
-            if (position == 0) {
-                LinkedListNode oHead = head;
-                head = node;
-                head.next = oHead;
-            } else {
-                tail = head;
-                for (int x = 1; x < position; x++) {
-                    tail = tail.next;
-                }
-                LinkedListNode oHead = tail.next;
-                tail.next = node;
-                node.next = oHead;
+    private static SinglyLinkedListNode insertNodeAtPosition(SinglyLinkedListNode head, int data, int position) {
+        SinglyLinkedListNode node = new SinglyLinkedListNode(data);
+
+        if (position == 0) {
+            SinglyLinkedListNode oHead = head;
+            head = node;
+            head.next = oHead;
+        } else {
+            SinglyLinkedListNode tail = head;
+            for (int x = 1; x < position; x++) {
+                tail = tail.next;
             }
+            SinglyLinkedListNode oHead = tail.next;
+            tail.next = node;
+            node.next = oHead;
         }
+        return head;
     }
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        int count = Integer.parseInt(sc.nextLine().trim());
-        MyLinkedList llist = new MyLinkedList();
+        SinglyLinkedList llist = new SinglyLinkedList();
+        int llistCount = Integer.parseInt(sc.nextLine());
 
-        for (int x = 0; x < count; x++) {
-            llist.insertNodeAtTail(Integer.valueOf(sc.nextLine()));
+        for (int i = 0; i < llistCount; i++) {
+            int llistItem = Integer.parseInt(sc.nextLine());
+            llist.insertNode(llistItem);
         }
 
-        LinkedListNode data2 = llist.head;
-        while (data2 != null) {
-            System.out.println(data2.data);
-            data2 = data2.next;
-        }
+        int data = Integer.parseInt(sc.nextLine());
+        int position = Integer.parseInt(sc.nextLine());
 
-        int newElement = Integer.valueOf(sc.nextLine().trim());
-        int newPosition = Integer.valueOf(sc.nextLine().trim());
-
-        llist.insertNodeAtSPosition(newElement,newPosition);
-
-        LinkedListNode nNode = llist.head;
-        while (nNode != null) {
-            System.out.println(nNode.data);
-            nNode = nNode.next;
-        }
+        SinglyLinkedListNode llist_head = insertNodeAtPosition(llist.head, data, position);
+        printSinglyLinkedList(llist_head);
+        sc.close();
     }
 }

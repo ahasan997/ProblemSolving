@@ -3,69 +3,73 @@ package Data_Structures.LinkedList;
 import java.util.*;
 
 public class DeleteDuplicateValue {
-    static class LinkedListNode {
+    static class SinglyLinkedListNode {
         public int data;
-        public LinkedListNode next;
+        public SinglyLinkedListNode next;
 
-        public LinkedListNode(int ndata) {
-            this.data = ndata;
+        private SinglyLinkedListNode(int nodeData) {
+            this.data = nodeData;
             this.next = null;
         }
     }
 
-    static class MyLinkedList {
-        public LinkedListNode head;
-        public LinkedListNode tail;
+    static class SinglyLinkedList {
+        public SinglyLinkedListNode head;
+        public SinglyLinkedListNode tail;
 
-        MyLinkedList() {
+        private SinglyLinkedList() {
             this.head = null;
             this.tail = null;
         }
 
-        public void insertNodeAtTail(int value) {
-            LinkedListNode node = new LinkedListNode(value);
+        private void insertNode(int nodeData) {
+            SinglyLinkedListNode node = new SinglyLinkedListNode(nodeData);
 
-            if (head == null) {
-                head = node;
+            if (this.head == null) {
+                this.head = node;
             } else {
-                tail.next = node;
+                this.tail.next = node;
             }
-            tail = node;
+
+            this.tail = node;
         }
+    }
 
-        public void RemoveDuplicate(LinkedListNode node) {
-
-            List<Integer> arrList = new ArrayList<Integer>();
-
-            LinkedListNode data = node;
-            while (data != null) {
-                if (!arrList.contains(data.data)) {
-                    arrList.add(data.data);
-                }
-                data = data.next;
-            }
-            head = null;
-            for (int x = 0; x < arrList.size(); x++) {
-                insertNodeAtTail(arrList.get(x));
-            }
+    private static void printSinglyLinkedList(SinglyLinkedListNode node) {
+        while (node != null) {
+            System.out.println(node.data);
+            node = node.next;
         }
+    }
+
+    private static SinglyLinkedListNode removeDuplicates(SinglyLinkedListNode head) {
+        List<Integer> arrList = new ArrayList<Integer>();
+        SinglyLinkedListNode data = head;
+        while (data != null) {
+            if (!arrList.contains(data.data)) {
+                arrList.add(data.data);
+            }
+            data = data.next;
+        }
+        SinglyLinkedList llist = new SinglyLinkedList();
+        for (int x = 0; x < arrList.size(); x++) {
+            llist.insertNode(arrList.get(x));
+        }
+        return llist.head;
     }
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
-        int count = Integer.parseInt(sc.nextLine().trim());
-        MyLinkedList llist = new MyLinkedList();
-        for (int x = 0; x < count; x++) {
-            llist.insertNodeAtTail(Integer.valueOf(sc.nextLine()));
+        SinglyLinkedList llist = new SinglyLinkedList();
+        int llistCount = Integer.parseInt(sc.nextLine());
+        for (int i = 0; i < llistCount; i++) {
+            int llistItem = Integer.parseInt(sc.nextLine());
+            llist.insertNode(llistItem);
         }
 
-        llist.RemoveDuplicate(llist.head);
-
-        LinkedListNode node = llist.head;
-        while (node != null) {
-            System.out.println(node.data);
-            node = node.next;
-        }
+        SinglyLinkedListNode llist1 = removeDuplicates(llist.head);
+        printSinglyLinkedList(llist1);
+        sc.close();
     }
 }

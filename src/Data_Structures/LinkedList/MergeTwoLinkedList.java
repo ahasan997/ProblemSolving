@@ -1,81 +1,99 @@
 package Data_Structures.LinkedList;
 
 import java.util.*;
+import java.util.stream.IntStream;
 
 public class MergeTwoLinkedList {
-
-    static class LinkedListNode {
+    static class SinglyLinkedListNode {
         public int data;
-        public LinkedListNode next;
+        public SinglyLinkedListNode next;
 
-        public LinkedListNode(int ndata) {
-            this.data = ndata;
+        private SinglyLinkedListNode(int nodeData) {
+            this.data = nodeData;
             this.next = null;
         }
     }
 
-    static class MyLinkedList {
-        public LinkedListNode head;
-        public LinkedListNode tail;
+    static class SinglyLinkedList {
+        public SinglyLinkedListNode head;
+        public SinglyLinkedListNode tail;
 
-        MyLinkedList() {
+        private SinglyLinkedList() {
             this.head = null;
             this.tail = null;
         }
 
-        public void insertNodeAtTail(int value) {
-            LinkedListNode node = new LinkedListNode(value);
+        private void insertNode(int nodeData) {
+            SinglyLinkedListNode node = new SinglyLinkedListNode(nodeData);
 
-            if (head == null) {
-                head = node;
+            if (this.head == null) {
+                this.head = node;
             } else {
-                tail.next = node;
+                this.tail.next = node;
             }
-            tail = node;
+
+            this.tail = node;
+        }
+    }
+
+    private static void printSinglyLinkedList(SinglyLinkedListNode node) {
+        while (node != null) {
+            System.out.println(node.data);
+            node = node.next;
+        }
+    }
+
+    private static SinglyLinkedListNode mergeList(SinglyLinkedListNode head1, SinglyLinkedListNode head2) {
+        if (head1 == null) {
+            head1 = head2;
+        } else {
+            SinglyLinkedListNode tail = head1;
+            SinglyLinkedListNode tmpNode = new SinglyLinkedListNode(0);
+            while (tail != null) {
+                tmpNode = tail;
+                tail = tail.next;
+            }
+            tmpNode.next = head2;
         }
 
-        public void MergeTwoLinkedList(LinkedListNode mNode, LinkedListNode nNode) {
-            tail = mNode;
-            tail.next = nNode;
+        List<Integer> arrList = new ArrayList<Integer>();
+        SinglyLinkedListNode data = head1;
+
+        while (data != null) {
+            arrList.add(data.data);
+            data = data.next;
         }
+        Collections.sort(arrList);
+
+        int n = arrList.size();
+        SinglyLinkedList nList = new SinglyLinkedList();
+        IntStream.range(0, n)
+                .forEach(i -> {
+                    nList.insertNode(arrList.get(i));
+                });
+
+        return nList.head;
     }
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
-        int count = Integer.parseInt(sc.nextLine().trim());
-        MyLinkedList llist = new MyLinkedList();
-        for (int x = 0; x < count; x++) {
-            llist.insertNodeAtTail(Integer.valueOf(sc.nextLine()));
+        SinglyLinkedList llist1 = new SinglyLinkedList();
+        int llistCount = Integer.parseInt(sc.nextLine());
+        for (int i = 0; i < llistCount; i++) {
+            int llistItem = Integer.parseInt(sc.nextLine());
+            llist1.insertNode(llistItem);
         }
 
-        int count2 = Integer.parseInt(sc.nextLine().trim());
-        MyLinkedList llist2 = new MyLinkedList();
-        for (int x = 0; x < count2; x++) {
-            llist2.insertNodeAtTail(Integer.valueOf(sc.nextLine()));
+        SinglyLinkedList llist2 = new SinglyLinkedList();
+        int llistCount2 = Integer.parseInt(sc.nextLine());
+        for (int i = 0; i < llistCount2; i++) {
+            int llistItem2 = Integer.parseInt(sc.nextLine());
+            llist2.insertNode(llistItem2);
         }
 
-        LinkedListNode nNode2 = llist2.head;
-
-        while (nNode2 != null) {
-            LinkedListNode nNode = llist.head;
-            int value = nNode2.data;
-            LinkedListNode nNode3 = new LinkedListNode(value);
-            LinkedListNode tempNode = new LinkedListNode(0);
-
-            while (nNode != null) {
-                tempNode = nNode;
-                nNode = nNode.next;
-            }
-
-            llist.MergeTwoLinkedList(tempNode, nNode3);
-            nNode2 = nNode2.next;
-        }
-
-        LinkedListNode xNode = llist.head;
-        while (xNode != null) {
-            System.out.println(xNode.data);
-            xNode = xNode.next;
-        }
+        SinglyLinkedListNode llist3 = mergeList(llist1.head, llist2.head);
+        printSinglyLinkedList(llist3);
+        sc.close();
     }
 }
