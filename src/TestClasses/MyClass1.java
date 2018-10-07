@@ -29,16 +29,24 @@ public class MyClass1 {
                     }
                     nList.add(current.left.data);
                     ((LinkedList<Node>) myQueue).add(current.left);
-
-
                 }
                 if (current.right != null) {
+                    int rhd = queue.peek() + 1;
+                    List<Integer> nList = hashtable.get(rhd);
+                    if(nList == null) {
+                        nList = new ArrayList<Integer>();
+                        hashtable.put(rhd,nList);
+                    }
+                    nList.add(current.right.data);
                     ((LinkedList<Node>) myQueue).add(current.right);
                 }
                 myQueue.remove();
             }
+            queue.remove();
 
             System.out.println(hashtable);
+            System.out.println(myQueue);
+            System.out.println(queue);
         }
     }
 
