@@ -1,9 +1,8 @@
-package TestClasses;
+package Days_of_Code;
 
-import java.util.*;
+import java.util.Scanner;
 
-public class MyClass1 {
-
+public class Recursion {
     private static int factorial(int n) {
 
         if (n <= 1) {
