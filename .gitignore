@@ -5,3 +5,5 @@ ProblemSolving.iml
 out
 out/
 out/*
+src/TestClasses
+src/TestClasses/*
